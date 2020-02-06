@@ -212,8 +212,7 @@ public abstract class S3CommonFileObject extends AbstractFileObject {
     try {
       // 1. Is it an existing file?
       if ( s3Object == null ) {
-        s3Object = getS3Object();
-        s3ObjectMetadata = s3Object.getObjectMetadata();
+        s3ObjectMetadata = fileSystem.getS3Client().getObjectMetadata( bucketName, key );
       }
       injectType( getName().getType() ); // if this worked then the automatically detected type is right
     } catch ( AmazonS3Exception e ) { // S3 object doesn't exist
